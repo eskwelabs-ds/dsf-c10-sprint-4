@@ -5,9 +5,10 @@ with open("source/index3.html", "r") as html_file:
 
 soup = bs4.BeautifulSoup(content, 'lxml')
 
-tags = soup.find_all()
+tags = soup.find_all("div", class_="w3-panel")
 for _tags in tags:
     print(_tags.p.text)
+
 
 
 

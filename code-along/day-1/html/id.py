@@ -5,8 +5,8 @@ with open("source/id.html", "r") as html_file:
 
 # # Print All HTML
 soup = bs4.BeautifulSoup(content, 'lxml')
-print(soup.prettify())
+# print(soup.prettify())
 
-p_id = soup
+p_id = soup.find_all("p", id="para1")
 print(p_id)
-print(p_id.text)
+# print(p_id.text)
