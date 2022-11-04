@@ -9,17 +9,18 @@ from time import sleep
 from webdriver_manager.chrome import ChromeDriverManager
 
 driver = webdriver.Chrome(ChromeDriverManager().install())
-# sleep(random.randint(12, 18))
+sleep(random.randint(12, 18))
 
 target_page = "https://www.rappler.com/topic/covid-19/"
 driver.get(target_page)
 driver.maximize_window()
 
-page_source = ----------------
-soup = bs4.BeautifulSoup(page_source, '----------------------')
+page_source = driver.page_source
+soup = bs4.BeautifulSoup(page_source, 'lxml')
 
-data = soup.select('--------------------')
+data = soup.select('div#primary > article > div.archive-article__content')
 for _data in data:
+    print(_data)
     link_info = _data.select('h2 > a')
     if len(link_info) > 0:
         print('URL', link_info[0]['href'])

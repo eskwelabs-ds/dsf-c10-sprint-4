@@ -5,21 +5,22 @@ import requests
 from lxml import etree
 
 try:
-    response = requests.request( "https://en.wikipedia.org/wiki/List_of_highest-grossing_Japanese_films")
-    popular_pages = []
+    response = requests.request("GET", "https://en.wikipedia.org/wiki/List_of_highest-grossing_Japanese_films")
+    popular_pages = list()
 
-    if response == 200:
+    if response.status_code == 200:
         soup = bs4.BeautifulSoup(response.text, 'lxml')
         dom = etree.HTML(str(soup))
-        data = dom.xpath()
+        # dom = etree.HTML(str(soup))
+        data = dom.xpath("//table//tr") 
 
         for _data in data[:51]:
-            td_values = _data
+            td_values = _data.findall("td")
             if len(td_values) > 1:
-                title = td_values[0]
+                title = td_values[0].find('i//a')
 
                 if title is None:
-                    title = td_values[0]
+                    title = td_values[0].find('a//i')
 
                 popular_pages.append({
                     'Title': title.text,

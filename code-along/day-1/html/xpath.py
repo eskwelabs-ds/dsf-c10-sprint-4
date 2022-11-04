@@ -5,12 +5,12 @@ with open("source/index3.html", "r") as html_file:
     content = html_file.read()
 
 soup = bs4.BeautifulSoup(content, 'lxml')
-dom = etree
+dom = etree.HTML(str(soup))
 
 ## Get By ID
-print(dom.xpath())
+print(dom.xpath("//div[@id='sample-1']//p")[0].text)
 
-## Get By Class
-data = dom.xpath()
+# ## Get By Class
+data = dom.xpath("//div[@class='w3-container']//div//p")
 for _data in data:
     print(_data.text)
