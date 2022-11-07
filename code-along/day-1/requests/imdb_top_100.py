@@ -11,20 +11,19 @@ try:
         soup = bs4.BeautifulSoup(response.text, 'lxml')
         dom = etree.HTML(str(soup))
 
-        data = dom.xpath('')
+        data = dom.xpath("//div[@class='lister-item-content']")
         top_movies = list()
         
-
         for _data in data:
-            rank = _data
-            title = _data
-            url = _data
-            genre = _data
-            runtime = _data
+            rank = _data.find("h3//span").text[:-1]
+            title = _data.find("h3//a").text
+            url = _data.find("h3//a").get("href")
+            genre = _data.find("p//span[@class='genre']").text
+            runtime =  _data.find("p//span[@class='runtime']").text
             details = _data
-            vote = details[0]
-            gross = details[1]
-            rating = _data
+            vote = _data.findall('p[@class="sort-num_votes-visible"]/span[@name="nv"]')[0].text
+            gross = _data.findall('p[@class="sort-num_votes-visible"]/span[@name="nv"]')[1].text
+            # rating = _data
 
             top_movies.append({
                 'rank': rank,
@@ -34,7 +33,7 @@ try:
                 'runtime': runtime,
                 'vote': vote,
                 'gross': gross,
-                'rating': rating
+                # 'rating': rating
             })
 
         print(pd.DataFrame(top_movies))

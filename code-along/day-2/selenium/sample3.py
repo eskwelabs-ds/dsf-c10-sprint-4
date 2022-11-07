@@ -22,8 +22,10 @@ options.add_argument("--incognito")
 sleep(3)
 
 
-title = driver.find_elements(By.XPATH, '-------------------')
+title = driver.find_elements(By.XPATH, '//a[@class="story_link story"]')
 
 for _title in title:
-    print(_title.-----------------------)
-    print(_title.get_attribute(------------------------))
+    print(_title.text)
+    print(_title.get_attribute('href'))
+
+driver.quit()

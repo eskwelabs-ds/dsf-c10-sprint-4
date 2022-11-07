@@ -6,5 +6,6 @@ shopee_scraper = ShopeeScraper()
 
 for index, row in df.iterrows():
     result = shopee_scraper.get_details(row['urls'])
+    break
 
 
